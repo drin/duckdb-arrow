@@ -40,8 +40,8 @@ namespace duckdb {
   unique_ptr<FunctionData>
   ArrowIPCTableFunction::BindFnScanArrows( ClientContext&          context
                                           ,TableFunctionBindInput& input
-                                          ,vector <LogicalType>&   return_types
-                                          ,vector <string>&        names) {
+                                          ,vector<LogicalType>&    return_types
+                                          ,vector<string>&         names) {
     // TODO: Only get the schema at binding time; decode the buffers later
     // Extract function arguments
     auto input_files = ListValue::GetChildren(input.inputs[0]);
