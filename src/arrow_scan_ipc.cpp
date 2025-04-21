@@ -2,30 +2,6 @@
 
 namespace duckdb {
 
-  TableFunction ArrowIPCTableFunction::GetFunction() {
-    // Fields for each IPC buffer to scan
-    child_list_t<LogicalType> ipc_buffer_fields {
-       {"ptr" , LogicalType::UBIGINT}
-      ,{"size", LogicalType::UBIGINT}
-    };
-
-    // The function argument is list<struct>; each struct describes an IPC buffer.
-    TableFunction scan_arrow_ipc_func(
-       "scan_arrow_ipc"
-      ,{ LogicalType::LIST(LogicalType::STRUCT(ipc_buffer_fields)) }
-      ,ArrowIPCTableFunction::ArrowScanFunction
-      ,ArrowIPCTableFunction::ArrowScanBind
-      ,ArrowTableFunction::ArrowScanInitGlobal
-      ,ArrowTableFunction::ArrowScanInitLocal
-    );
-
-    scan_arrow_ipc_func.cardinality = ArrowTableFunction::ArrowScanCardinality;
-    scan_arrow_ipc_func.projection_pushdown = true;
-    scan_arrow_ipc_func.filter_pushdown     = false;
-
-    return scan_arrow_ipc_func;
-  }
-
   arrow::Status
   ConsumeArrowStream( std::shared_ptr<ArrowIPCStreamBuffer> ipc_buffer
                      ,std::vector<duckdb::Value> input_buffers) {
