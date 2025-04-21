@@ -50,6 +50,7 @@ ExternalProject_Add(
                    -DARROW_POSITION_INDEPENDENT_CODE=ON
                    -DARROW_SIMD_LEVEL=NONE
                    -DARROW_JEMALLOC=OFF
+                   -DARROW_MIMALLOC=OFF
                    -DARROW_IPC=ON
                    -DARROW_JSON=OFF
                    -DARROW_ORC=OFF
