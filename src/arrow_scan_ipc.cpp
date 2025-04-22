@@ -27,7 +27,8 @@ namespace duckdb {
     // Then, bind the logical schema types (`names` and `return_types`)
     SchemaFromIPCBuffer(ipc_buffer, fn_data->schema_root);
     PopulateArrowTableType(
-       fn_data->arrow_table
+       DBConfig::GetConfig(context)
+      ,fn_data->arrow_table
       ,fn_data->schema_root
       ,names
       ,return_types
@@ -85,7 +86,8 @@ namespace duckdb {
     // Then, bind the logical schema types (`names` and `return_types`)
     SchemaFromIPCBuffer(ipc_buffer, fn_data->schema_root);
     PopulateArrowTableType(
-       fn_data->arrow_table
+       DBConfig::GetConfig(context)
+      ,fn_data->arrow_table
       ,fn_data->schema_root
       ,names
       ,return_types

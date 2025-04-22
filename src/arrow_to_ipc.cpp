@@ -79,13 +79,16 @@ namespace duckdb {
     return_types.emplace_back(LogicalType::BOOLEAN);
     names.emplace_back("header");
 
+
     // Create the Arrow schema
     ArrowSchema schema;
+
+    ClientProperties client_props = context.GetClientProperties();
     ArrowConverter::ToArrowSchema(
        &schema
       ,input.input_table_types
       ,input.input_table_names
-      ,context.GetClientProperties()
+      ,client_props
     );
 
     result->schema = arrow::ImportSchema(&schema).ValueOrDie();
